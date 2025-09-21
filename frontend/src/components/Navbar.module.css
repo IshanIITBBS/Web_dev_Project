@@ -1,0 +1,73 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Dark, semi-transparent background */
+  background-color: rgba(200, 2, 245, 0.9); 
+  backdrop-filter: blur(10px); /* Creates a cool frosted glass effect */
+  padding: 1rem 2rem;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensures the navbar stays on top of other content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 7vh;
+}
+
+
+.navbarLeft,
+.navbarRight {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding-bottom: 5px; /* Add some space for the underline effect */
+  position: relative;
+}
+
+.navbar a:hover {
+  color: #25ff03; /* A vibrant hover color */
+}
+
+/* Underline hover effect */
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #208006;
+  transform: scaleX(0); /* Start with a scale of 0 */
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar a:hover::after {
+  transform: scaleX(1); /* Animate to full width on hover */
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.logoutBtn:hover {
+  text-decoration: underline;
+}
+
+.navbarLeft a.activeLink {
+  color: #f7a300; /* Or whatever color you want */
+  font-weight: bold;
+}
