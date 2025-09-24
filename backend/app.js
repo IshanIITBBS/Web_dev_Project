@@ -15,6 +15,7 @@ const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth.js') ;
 const app = express();
 const cors = require("cors");
+require("dotenv").config();
 
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true },
@@ -22,7 +23,7 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true },
 
 
 
-const MongoUri = 'mongodb+srv://Ishan:MongoDB%406077@cluster0.thxtfon.mongodb.net/shop' ;
+const MongoUri = process.env.MONGO_URI ;
 const Mongostore = MongoSessionConnect(session);
 const store = new Mongostore({
     uri : MongoUri,
