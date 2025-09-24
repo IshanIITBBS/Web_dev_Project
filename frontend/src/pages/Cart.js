@@ -35,7 +35,7 @@ const CartPage = () => {
   
 
   useEffect(() => {
-    fetch("http://localhost:5000/cart", {
+    fetch(`${process.env.REACT_APP_API_URL}/cart`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -59,7 +59,7 @@ const CartPage = () => {
 
   const handleOrder = async () => {
     try {
-      const res = await fetch("http://localhost:5000/create-order", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/create-order`, {
         method: "POST",
         credentials: "include",
         headers: {

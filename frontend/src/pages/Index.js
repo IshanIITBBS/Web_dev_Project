@@ -11,7 +11,7 @@ function ProductList() {
 
  
   useEffect(() => {
-    fetch("http://localhost:5000/") 
+    fetch(`${process.env.REACT_APP_API_URL}/`) 
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.prods || []); 

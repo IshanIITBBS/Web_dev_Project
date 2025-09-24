@@ -1,7 +1,7 @@
 
 export async function checkAuthStatus() {
   try {
-    const res = await fetch("http://localhost:5000/auth/status", {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/status`, {
       credentials: "include", 
     });
 
@@ -19,7 +19,7 @@ export async function checkAuthStatus() {
 
 export async function fetchCsrfToken() {
   try {
-    const res = await fetch("http://localhost:5000/get-csrf-token", {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/get-csrf-token`, {
       credentials: "include", 
     });
 

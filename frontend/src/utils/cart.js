@@ -7,13 +7,13 @@ export const addToCart = async (productId, navigate,checkAuthStatus) => {
             }
        
     
-    const csrfRes = await fetch("http://localhost:5000/get-csrf-token", {
+    const csrfRes = await fetch(`${process.env.REACT_APP_API_URL}/get-csrf-token`, {
       credentials: "include", 
     });
     const { csrfToken } = await csrfRes.json();
 
     
-    const response = await fetch("http://localhost:5000/cart", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const addToCart = async (productId, navigate,checkAuthStatus) => {
 
 export const deleteFromCart = async (productId, csrf) => {
   try {
-    const response = await fetch("http://localhost:5000/delete-product", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/delete-product`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

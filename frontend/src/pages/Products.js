@@ -7,20 +7,17 @@ import { checkAuthStatus } from "../utils/auth";
 function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
   const navigate = useNavigate();
-
+  const [searchval, setSearchval] = useState("") ;
  
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://localhost:5000/?page=${currentPage}&limit=5&sort=${sortOrder}&search=${search}`
+      `${process.env.REACT_APP_API_URL}/?page=${currentPage}&limit=5&sort=${sortOrder}&search=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -32,34 +29,38 @@ function ProductList() {
         console.error("Error fetching products:", err);
         setLoading(false);
       });
-  }, [currentPage, sortOrder, search]);
+  }, [currentPage, sortOrder, searchval]);
 
   if (loading) return <h2>Loading...</h2>;
 
   return (
     <main>
       <div className={styles.controls}>
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setCurrentPage(1); 
-          }}
-        />
-        <select
-          value={sortOrder}
-          onChange={(e) => {
-            setSortOrder(e.target.value);
-            setCurrentPage(1); 
-          }}
-        >
-          <option value="asc">Price: Low → High</option>
-          <option value="desc">Price: High → Low</option>
-        </select>
-      </div>
-
+    <input
+      type="text"
+      placeholder="Search products..."
+      value={search}
+      onChange={(e) => {
+        setSearch(e.target.value); 
+      }}
+    />
+    <button
+      className={styles.searchBtn}
+      onClick={() => {
+        setSearchval(search); 
+        setCurrentPage(1);
+      }}>🔍</button>
+    <select
+      value={sortOrder}
+      onChange={(e) => {
+        setSortOrder(e.target.value);
+        setCurrentPage(1);
+      }}
+    >
+      <option value="asc">Price: Low → High</option>
+      <option value="desc">Price: High → Low</option>
+    </select>
+</div>
       
       {products.length > 0 ? (
         <div className={styles.grid}>

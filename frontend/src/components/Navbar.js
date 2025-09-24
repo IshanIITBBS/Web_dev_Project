@@ -28,7 +28,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    fetch("http://localhost:5000/logOut", {
+    fetch(`${process.env.REACT_APP_API_URL}/logOut`, {
       method: "POST",
       credentials: "include",
       headers: {

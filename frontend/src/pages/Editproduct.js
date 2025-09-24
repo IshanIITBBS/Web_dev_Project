@@ -33,7 +33,7 @@ const Orders = ({ csrf }) => {
        }, []);
 
         useEffect(() => {
-  fetch(`http://localhost:5000/admin/edit-product/${productId}`, {
+  fetch(`${process.env.REACT_APP_API_URL}/admin/edit-product/${productId}`, {
     credentials: "include",
   })
     .then((res) => {

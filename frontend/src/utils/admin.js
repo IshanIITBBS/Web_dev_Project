@@ -1,7 +1,8 @@
 
+
 export const onDelete = async (productId, csrfToken) => {
   try {
-    const response = await fetch("http://localhost:5000/admin/delete-product", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/admin/delete-product`, {
       method: "POST",
       credentials: "include", 
       headers: {

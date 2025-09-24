@@ -33,7 +33,7 @@ const AdminProducts = () => {
 
     
     useEffect(() => {
-      fetch("http://localhost:5000/admin/products", {
+      fetch(`${process.env.REACT_APP_API_URL}/admin/products`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json"

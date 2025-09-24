@@ -9,7 +9,7 @@ const ShowReviewsPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${productId}/reviews`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/reviews`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data.reviews || []);

@@ -12,8 +12,8 @@ const AddProduct = ({ editing = false, product = {}, csrfToken }) => {
     e.preventDefault();
 
     const endpoint = editing
-      ? "http://localhost:5000/admin/edit-product"
-      : "http://localhost:5000/admin/add-product";
+      ? `${process.env.REACT_APP_API_URL}/admin/edit-product`
+      : `${process.env.REACT_APP_API_URL}/admin/add-product`;
 
     const payload = {
       title,

@@ -17,9 +17,8 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 
-
-app.use(cors({ origin: "http://localhost:3000", credentials: true },
-        {origin : "https://q95crv67-3000.inc1.devtunnels.ms/", credentials:true}));
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 
 
 
@@ -52,6 +51,7 @@ app.use(flash()) ;
 // in app.js (after csurf middleware is applied)
 app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
+  //console.log(req) ;
   next();
 });
 
@@ -91,11 +91,11 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404);
-
+const PORT = process.env.PORT || 5000; // fallback to 5000 locally
 Mongoose.connect(MongoUri)
 .then(()=>{
     console.log('connected') ;
-    app.listen(5000) ;
+    app.listen(PORT) ;
 })
 .catch(err=>{
     console.log(err) ;

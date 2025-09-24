@@ -2,7 +2,6 @@ const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 //const nodemailer = require('nodemailer')
 //const axios = require('axios')
-require('dotenv').config();
 const {validationResult} = require('express-validator') ;
 
 exports.getlogin = (req,res,next)=>{
