@@ -24,7 +24,8 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 app.use((req,res,next)=>{
   console.log(req.headers.origin) ;
   console.log(FRONTEND_URL) ;
-  console.log(req.headers.CSRF-Token) ;
+  const csrf = req.headers['CSRF-Token'] ;
+  console.log(csrf) ;
   next() ;
 })
 
@@ -82,6 +83,7 @@ app.use((req, res, next) => {
 
 
 app.get("/get-csrf-token", (req, res) => {
+  console.log("CSRF TOKEN GIVEN :- ",req.csrfToken()) ;
   res.json({ csrfToken: req.csrfToken() });
 });
 
