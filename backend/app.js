@@ -33,12 +33,7 @@ const store = new Mongostore({
 const csrfProtection = csruf() ;
 
 
-// const {
-//     invalidCsrfTokenError, // This is just for convenience if you plan on making your own middleware.
-//     generateToken, // Use this in your routes to provide a CSRF hash + token cookie and token.
-//     validateRequest, // Also a convenience if you plan on making your own middleware.
-//     doubleCsrfProtection, // This is the default CSRF protection middleware.
-//   } = doubleCsrf();
+
 
 
 app.set('view engine', 'ejs');
@@ -59,7 +54,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// route to get token
+
 app.get("/get-csrf-token", (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
@@ -86,7 +81,7 @@ app.use((req,res,next)=>{
     next() ;
 })
 
-// routes/auth.js (or wherever you keep auth routes)
+
 
 
 

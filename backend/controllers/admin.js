@@ -16,32 +16,6 @@ exports.getAddProduct = (req, res, next) => {
 
 
 
-// exports.editproduct = (req,res,next)=>{
-//    const editMode = req.query.edit ;
-//    if(!editMode) 
-//     {
-//       res.redirect('/') ;
-//       return ;
-//     }
-//     const prodId = req.params.productId ;
-//     Product.findById(prodId)
-//     .then((product)=>{
-//       if(!product) { res.redirect('/'); return ;}
-//       res.render('admin/add-product',{
-//         pageTitle: 'Edit Product',
-//         path: '/admin/edit-product',
-//         formsCSS: true,
-//         productCSS: true,
-//         activeAddProduct: true,
-//         editing:editMode ,
-//         product:product,
-//         loggedIn:req.session.loggedIn
-//       })
-
-//     })
-//     .catch(err=>console.log(err))
-// }
-
 exports.editproduct = (req, res, next) => {
   const prodId = req.params.productId;
 
@@ -69,14 +43,14 @@ exports.posteditProduct = (req, res, next) => {
   Product.findById(prodId)
     .then(product => {
       if (!product) {
-        return res.status(404).json({ message: "Product not found" }); // Product not found
+        return res.status(404).json({ message: "Product not found" }); 
       }
 
       if (product.UserId.toString() !== req.user._id.toString()) {
         return res.status(401).json({ message: "Unauthorized" });
       }
 
-      // Update product
+      
       product.title = title;
       product.imageUrl = imageUrl;
       product.price = price;
@@ -90,7 +64,7 @@ exports.posteditProduct = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: "Internal Server Error" }); // Optional: redirect on error
+      res.status(500).json({ message: "Internal Server Error" }); 
     });
 };
 
@@ -128,18 +102,7 @@ Product.find({"UserId":req.user._id})
 };
 
 
-// exports.deleteproduct = (req,res,next)=>{
-//   const prodId = req.body.productId ;
-//   Product.findByIdAndDelete(prodId)
-//   .then(result=>{
-//      res.redirect('/') ;
-//   })
-//  .catch(err=>{
-//   console.log(err) ;
-//  })
-// }
 
-// backend/controllers/admin.js
 exports.deleteproduct = (req, res, next) => {
   const prodId = req.body.productId;
 

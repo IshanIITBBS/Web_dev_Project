@@ -15,21 +15,7 @@ exports.getProducts = (req, res, next) => {
     .catch(err => console.log(err))
 };
 
-// exports.getProduct = (req, res, next) => {
-//   const prodId = req.params.productId
-//   Product.findById(prodId)
-//     .then(product => {
-//       res.render('shop/product-detail',
-//          { product: product, 
-//           pageTitle: product.title, 
-//           path: '/products',
-//           loggedIn:req.session.loggedIn
-//          });
-//     })
-//     .catch(err => console.log(err));
-// }
 
-// controllers/shop.js
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
   Product.findById(prodId)
@@ -45,19 +31,7 @@ exports.getProduct = (req, res, next) => {
     });
 };
 
-// exports.postcart = (req, res, next) => {
-//   const prodId = req.body.productId ;
-//   Product.findById(prodId)
-//   .then(product=>{
-//     return req.user.addToCart(product) ;
-//   })
-//   .then(result=>{
-//     res.redirect('/cart');
-//   })
-//   .catch(err=>{
-//     console.log(err) ;
-//   })
-// }
+
 
 exports.postcart = (req, res, next) => {
   const prodId = req.body.productId;
@@ -74,49 +48,21 @@ exports.postcart = (req, res, next) => {
     });
 };
 
-// exports.getIndex = (req, res, next) => { 
-//   Product.find()
-//     .then(products => {
-//       res.render('shop/index', {
-//         prods: products,
-//         pageTitle: 'Shop',
-//         path: '/',
-//         loggedIn:req.session.loggedIn
-//       });
-//     })
-//     .catch(err => console.log(err));
-// };
 
-// controllers/shop.js
-// exports.getIndex = (req, res, next) => {
-//   Product.find()
-//     .then(products => {
-//       res.json({
-//         prods: products,
-//         pageTitle: 'Shop',
-//         loggedIn: req.session ? req.session.loggedIn : false
-//       });
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.status(500).json({ error: "Failed to fetch products" });
-//     });
-// };
-// Example: GET /?page=2&limit=6&sort=asc&search=apple
 exports.getIndex = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page) || 1;   // default page 1
-    const limit = parseInt(req.query.limit) || 5; // default 6 per page
+    const page = parseInt(req.query.page) || 1;   
+    const limit = parseInt(req.query.limit) || 5; 
     const skip = (page - 1) * limit;
 
     const sort = req.query.sort === "asc" ? { price: 1 } : 
                  req.query.sort === "desc" ? { price: -1 } : {};
 
     const search = req.query.search ? {
-      title: { $regex: req.query.search, $options: "i" } // case-insensitive search
+      title: { $regex: req.query.search, $options: "i" } 
     } : {};
 
-    // fetch filtered, sorted, paginated products
+   
     const products = await Product.find(search)
       .sort(sort)
       .skip(skip)
@@ -239,12 +185,12 @@ exports.addReview = async (req, res) => {
     const product = await Product.findById(productId);
     if (!product) return res.status(404).json({ message: "Product not found" });
 
-    // Make sure user info is present
+    
     if (!req.user) return res.status(401).json({ message: "User not logged in" });
 
     const review = {
-      user: req.user._id,       // user id from session
-      username: req.user.email,  // username from session
+      user: req.user._id,       
+      username: req.user.email,  
       rating,
       comment,
       createdAt: new Date()
@@ -268,7 +214,7 @@ exports.getProductReviews = async (req, res) => {
   try {
     const { productId } = req.params;
 
-    // find the product
+   
     const product = await Product.findById(productId).select("title reviews averageRating numReviews");
 
     if (!product) {
@@ -287,9 +233,4 @@ exports.getProductReviews = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch reviews" });
   }
 };
-// exports.getCheckout = (req, res, next) => {
-//   res.render('shop/checkout', {
-//     path: '/checkout',
-//     pageTitle: 'Checkout'    
-//   });
-// };
+

@@ -29,25 +29,25 @@ exports.postlogin = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        // User not found
+        
         req.session.save(err => {
           res.status(401).json({ success: false, message: "Invalid email or password" });
         });
         return ;
       }
 
-      // Compare password
+     
       bcrypt.compare(password, user.password)
         .then(match => {
           if (!match) {
-            // Password doesn't match
+            
             req.session.save(err => {
               res.status(401).json({ success: false, message: "Invalid email or password" });
             });
             return ;
           }
 
-          // Successful login
+         
           req.session.loggedIn = true;
           req.session.user = user;
           req.session.save(err => {
@@ -105,59 +105,6 @@ exports.getsignup = (req,res,next)=>{
 }
 
 
-
-// exports.postsignup = (req,res,next)=>{
-//     const errors = validationResult(req) ;
-//     if(!errors.isEmpty())
-//     {
-//         return res.status(422).render('auth/signup',{
-//         pageTitle:"Sign Up",
-//         path:'/signup',
-//         loggedIn:req.session.loggedIn,
-//         error : errors.array()[0].msg
-//     }) ;
-//     }
-//     const email = req.body.email ;
-//     const password = req.body.password;
-//     const confirmPassword = req.body.confirmPassword ;
-//     if(password != confirmPassword )
-//         {
-//             req.flash('error',"Password doesn't match ( Confirmation failed ) ") ;
-//              req.session.save((err)=>{
-//               res.redirect('/signup') ;
-//               })
-//               return ;
-//         }
-//     User.findOne({email:email})
-//     .then(user=>{
-//         if(user)
-//             {
-//                  req.flash('error','Email already exists') ;
-//                  return  req.session.save((err)=>{
-//                    res.redirect('/signup') ;
-//                    })
-//             }
-//         return bcrypt.hash(password,12)
-//                    .then(hashedpassword=>{
-//                     user = new User({
-//                         email:email,
-//                       password:hashedpassword,
-//                       cart:{items : []}
-//                     })
-//                     return user.save() ;
-//                    })
-//                     .then(result=>{
-//                         res.redirect('/login');
-//                        // return sendmail(email) ;
-//                     })
-//                     .catch(err=>{
-//                         console.log(err) ;
-//                     })
-//     })
-//     .catch(err=>{
-//         console.log(err) ;
-//     })
-// }
 
 exports.postsignup = (req, res, next) => {
   const errors = validationResult(req);
@@ -228,28 +175,6 @@ exports.getAuthStatus = (req, res) => {
 };
 
 
-// async function sendmail(email) {
-//   try {
-//     const response = await axios.post(
-//       "https://send.api.mailtrap.io/api/send",   // Mailtrap Sending API endpoint
-//       {
-//         from: { email: "mohd.ishankrj@gmail.com", name: "Ishan" },
-//         to: [{ email: email }],
-//         subject: "Signed up success",
-//         text: "Welcome to Shopping kart",
-//       },
-//       {
-//         headers: {
-//           "Authorization": `Bearer ${process.env.MAILTRAP_API_TOKEN}`,
-//           "Content-Type": "application/json"
-//         }
-//       }
-//     );
 
-//     console.log("Message sent:", response.data);
-//   } catch (error) {
-//     console.error("Error sending:", error.response?.data || error.message);
-//   }
-// }
 
 
