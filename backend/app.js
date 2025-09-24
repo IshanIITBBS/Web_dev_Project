@@ -50,7 +50,7 @@ const store = new Mongostore({
 })
 
 
-const csrfProtection = csruf() ;
+
 
 
 
@@ -58,8 +58,7 @@ const csrfProtection = csruf() ;
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-app.use(express.json()); // parses application/json
-app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -68,9 +67,18 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: store,
+   cookie: {
+    sameSite: "none",
+    secure: true
+  }
 }));
 
+const csrfProtection = csruf() ;
 app.use(csrfProtection) ;
+
+app.use(express.json()); // parses application/json
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(flash()) ;
 
 
