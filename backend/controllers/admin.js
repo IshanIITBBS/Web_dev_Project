@@ -1,6 +1,5 @@
 const Product = require('../models/product');
-const Cart = require('../models/cart');
-const CartItem = require('../models/cart-item')
+
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/add-product', {
