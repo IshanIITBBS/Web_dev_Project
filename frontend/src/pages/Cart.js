@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { fetchCsrfToken,checkAuthStatus } from "../utils/auth"; 
 import { deleteFromCart } from "../utils/cart"; 
 import styles from "./Cart.module.css"; 
@@ -19,7 +19,7 @@ const CartPage = () => {
       }
       }
       fetchAuth();
-    }, []);
+    }, [navigate]);
     
 
   useEffect(() => {

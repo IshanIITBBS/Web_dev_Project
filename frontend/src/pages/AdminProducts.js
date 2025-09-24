@@ -1,4 +1,4 @@
-import React from "react";
+
 import styles from "./AdminProducts.module.css";
 import { checkAuthStatus } from "../utils/auth";
 import { useEffect,useState } from "react";
@@ -21,7 +21,7 @@ const AdminProducts = () => {
             }
         }
         fetchAuth();
-      }, []);
+      }, [navigate]);
 
       useEffect(() => {
           async function getToken() {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { checkAuthStatus ,fetchCsrfToken} from "../utils/auth";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,7 @@ const LoginPage = () => {
         }
     }
     fetchAuth();
-  }, []);
+  }, [navigate]);
    
 
   const handleSubmit = async (e) => {

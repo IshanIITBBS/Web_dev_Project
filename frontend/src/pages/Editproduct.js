@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAuthStatus,fetchCsrfToken } from "../utils/auth";
 import AddProduct from "../components/Addproduct";
@@ -22,7 +22,7 @@ const Orders = ({ csrf }) => {
            }
        }
        fetchAuth();
-     }, []);
+     }, [navigate]);
     
       useEffect(() => {
          async function getToken() {
@@ -39,7 +39,6 @@ const Orders = ({ csrf }) => {
     .then((res) => {
       if (!res.ok) {
         throw new Error("Failed to fetch product");
-        navigate("/admin/products") ;
       }
       return res.json();
     })

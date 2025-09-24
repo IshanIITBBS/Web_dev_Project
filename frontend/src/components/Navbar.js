@@ -1,11 +1,10 @@
 
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import  { useState, useEffect } from "react";
+import { Link,  useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { checkAuthStatus, fetchCsrfToken } from "../utils/auth";
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [auth, setAuth] = useState({ isLoggedIn: false });
   const [csrfToken, setCsrfToken] = useState("");

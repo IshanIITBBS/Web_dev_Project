@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import styles from "./Products.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../utils/cart";
@@ -17,7 +17,7 @@ function ProductList() {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `${process.env.REACT_APP_API_URL}/?page=${currentPage}&limit=5&sort=${sortOrder}&search=${search}`
+      `${process.env.REACT_APP_API_URL}/?page=${currentPage}&limit=5&sort=${sortOrder}&search=${searchval}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -30,6 +30,9 @@ function ProductList() {
         setLoading(false);
       });
   }, [currentPage, sortOrder, searchval]);
+    
+
+
 
   if (loading) return <h2>Loading...</h2>;
 

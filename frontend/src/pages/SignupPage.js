@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { fetchCsrfToken,checkAuthStatus } from "../utils/auth";
 import styles from "./SignupPage.module.css";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const SignupPage = () => {
           }
       }
       fetchAuth();
-    }, []);
+    }, [navigate]);
     
   useEffect(() => {
     async function getToken() {

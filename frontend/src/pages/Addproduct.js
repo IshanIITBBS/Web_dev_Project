@@ -1,10 +1,10 @@
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAuthStatus,fetchCsrfToken } from "../utils/auth";
 import AddProduct from "../components/Addproduct";
 
-const Orders = ({ csrf }) => {
+const Orders = () => {
   const [csrfToken, setCsrfToken] = useState("");
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Orders = ({ csrf }) => {
            }
        }
        fetchAuth();
-     }, []);
+     }, [navigate]);
     
       useEffect(() => {
          async function getToken() {
