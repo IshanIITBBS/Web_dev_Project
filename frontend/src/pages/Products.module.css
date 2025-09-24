@@ -18,7 +18,7 @@
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* Header */
+
 .cardHeader {
   background: #f5f5f5;
   padding: 0.8rem;
@@ -32,7 +32,7 @@
   font-weight: 600;
 }
 
-/* Image */
+
 .cardImage {
   text-align: center;
 }
@@ -48,7 +48,7 @@
   transform: scale(1.05);
 }
 
-/* Content */
+
 .cardContent {
   padding: 1rem;
   text-align: center;
@@ -67,7 +67,7 @@
   line-height: 1.4;
 }
 
-/* Actions */
+
 .cardActions {
   display: flex;
   justify-content: center;
@@ -144,8 +144,7 @@
 .sortSelect:focus {
   border-color: #007bff;
 }
-/* Pagination styles */
-/* Controls (search + sort) */
+
 .controls {
   display: flex;
   justify-content: center;
@@ -167,7 +166,7 @@
   border: 1px solid #0777ff;
 }
 
-/* Pagination */
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -207,11 +206,11 @@
 }
 
 .filledStar {
-  color: gold; /* Yellow stars */
+  color: gold;
 }
 
 .emptyStar {
-  color: #ccc; /* Gray for empty stars */
+  color: #ccc; 
 }
 
 .ratingText {

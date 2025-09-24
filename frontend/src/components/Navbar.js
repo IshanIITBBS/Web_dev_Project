@@ -1,4 +1,4 @@
-// src/components/Navbar.js
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
@@ -9,7 +9,7 @@ const Navbar = () => {
   const location = useLocation();
   const [auth, setAuth] = useState({ isLoggedIn: false });
   const [csrfToken, setCsrfToken] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false); // 👈 New state for mobile menu
+  const [menuOpen, setMenuOpen] = useState(false); 
 
   useEffect(() => {
     async function fetchAuth() {
@@ -52,12 +52,11 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      {/* Logo or Title */}
       <div className={styles.logo}>
         🛒 Shop
       </div>
        
-      {/* Hamburger Icon for Mobile */}
+    
       <div
         className={styles.hamburger}
         onClick={() => setMenuOpen((prev) => !prev)}
@@ -67,7 +66,7 @@ const Navbar = () => {
         <span></span>
       </div>
 
-      {/* Menu Links */}
+     
       <div className={`${styles.menu} ${menuOpen ? styles.open : ""}`}>
         <ul className={styles.navbarLeft}>
           <li>

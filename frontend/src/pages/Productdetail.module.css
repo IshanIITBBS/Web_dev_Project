@@ -93,11 +93,11 @@
 }
 
 .filledStar {
-  color: gold; /* Yellow stars */
+  color: gold; 
 }
 
 .emptyStar {
-  color: #ccc; /* Gray for empty stars */
+  color: #ccc; 
 }
 
 .ratingText {

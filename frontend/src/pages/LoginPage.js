@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  // Fetch CSRF token when component mounts
+  
  useEffect(() => {
     async function getToken() {
       const token = await fetchCsrfToken();
@@ -35,10 +35,10 @@ const LoginPage = () => {
     try {
       const res = await fetch("http://localhost:5000/login", {
         method: "POST",
-        credentials: "include", // send cookies/session
+        credentials: "include", 
         headers: {
           "Content-Type": "application/json",
-          "CSRF-Token": csrfToken, // match your backend csrf config
+          "CSRF-Token": csrfToken, 
         },
         body: JSON.stringify({ email, password }),
       });

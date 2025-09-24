@@ -8,7 +8,7 @@ function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 👇 New states
+
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +16,7 @@ function ProductList() {
 
   const navigate = useNavigate();
 
-  // Fetch products from backend with pagination + filters
+ 
   useEffect(() => {
     setLoading(true);
     fetch(
@@ -38,7 +38,6 @@ function ProductList() {
 
   return (
     <main>
-      {/* Search + Sort Controls */}
       <div className={styles.controls}>
         <input
           type="text"
@@ -46,14 +45,14 @@ function ProductList() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            setCurrentPage(1); // reset page when searching
+            setCurrentPage(1); 
           }}
         />
         <select
           value={sortOrder}
           onChange={(e) => {
             setSortOrder(e.target.value);
-            setCurrentPage(1); // reset page when sorting
+            setCurrentPage(1); 
           }}
         >
           <option value="asc">Price: Low → High</option>
@@ -61,7 +60,7 @@ function ProductList() {
         </select>
       </div>
 
-      {/* Product Grid */}
+      
       {products.length > 0 ? (
         <div className={styles.grid}>
           {products.map((product) => (
@@ -127,7 +126,7 @@ function ProductList() {
         <h1>No Products Found!</h1>
       )}
 
-      {/* Pagination Controls */}
+      
       <div className={styles.pagination}>
         <button
           className={styles.pageBtn}

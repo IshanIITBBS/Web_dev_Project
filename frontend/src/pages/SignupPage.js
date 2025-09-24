@@ -52,7 +52,7 @@ const SignupPage = () => {
 
       if (res.ok) {
         setSuccess(data.message);
-        setTimeout(() => navigate("/login"), 1500); // redirect after success
+        setTimeout(() => navigate("/login"), 1500); 
       } else {
         setError(data.error || "Signup failed");
       }

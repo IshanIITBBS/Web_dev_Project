@@ -6,18 +6,18 @@ export const addToCart = async (productId, navigate,checkAuthStatus) => {
                navigate("/login");
             }
        
-    // 1. get csrf token
+    
     const csrfRes = await fetch("http://localhost:5000/get-csrf-token", {
-      credentials: "include", // important for session cookies
+      credentials: "include", 
     });
     const { csrfToken } = await csrfRes.json();
 
-    // 2. add to cart
+    
     const response = await fetch("http://localhost:5000/cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "CSRF-Token": csrfToken, // ✅ header name matches csurf default
+        "CSRF-Token": csrfToken, 
       },
       credentials: "include",
       body: JSON.stringify({ productId }),
@@ -36,7 +36,6 @@ export const addToCart = async (productId, navigate,checkAuthStatus) => {
 };
 
 
-// utils/cart.js
 
 export const deleteFromCart = async (productId, csrf) => {
   try {
@@ -53,7 +52,7 @@ export const deleteFromCart = async (productId, csrf) => {
     const data = await response.json();
 
     if (response.ok) {
-      return data.success; // return updated cart from backend
+      return data.success; 
     } else {
       alert(data.message || "Failed to delete product");
       return null;

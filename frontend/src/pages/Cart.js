@@ -1,14 +1,13 @@
-// src/pages/CartPage.js
+
 import React, { useEffect, useState } from "react";
-import { fetchCsrfToken,checkAuthStatus } from "../utils/auth"; // utility to get CSRF token
-import { deleteFromCart } from "../utils/cart"; // you can create a delete function similar to addToCart
-import styles from "./Cart.module.css"; // create a CSS module for styling
+import { fetchCsrfToken,checkAuthStatus } from "../utils/auth"; 
+import { deleteFromCart } from "../utils/cart"; 
+import styles from "./Cart.module.css"; 
 import { useNavigate } from "react-router-dom";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [csrfToken, setCsrfToken] = useState("");
- // const [auth, setAuth] = useState({ isLoggedIn: false });
   const navigate = useNavigate() ;
   
 
@@ -22,7 +21,7 @@ const CartPage = () => {
       fetchAuth();
     }, []);
     
-  // Fetch CSRF token on mount
+
   useEffect(() => {
     async function getToken() {
       const token = await fetchCsrfToken();
@@ -34,7 +33,7 @@ const CartPage = () => {
  
      
   
-  // Fetch cart items on mount
+
   useEffect(() => {
     fetch("http://localhost:5000/cart", {
       credentials: "include",

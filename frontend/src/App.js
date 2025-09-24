@@ -1,8 +1,7 @@
-// src/App.js
 
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Index from './pages/Index'; // 👈 Import the new component
+import Index from './pages/Index'; 
 import ProductList from './pages/Products'
 import ProductDetail from './pages/Productdetail';
 import LoginPage from './pages/LoginPage';

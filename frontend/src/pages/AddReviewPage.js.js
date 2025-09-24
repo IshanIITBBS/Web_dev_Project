@@ -10,7 +10,7 @@ const AddReviewPage = () => {
   const [error, setError] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
   const navigate = useNavigate();
-    // Fetch CSRF token when component mounts
+  
    useEffect(() => {
       async function getToken() {
         const token = await fetchCsrfToken();

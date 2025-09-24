@@ -1,9 +1,9 @@
-// utils/product.js
+
 export const onDelete = async (productId, csrfToken) => {
   try {
     const response = await fetch("http://localhost:5000/admin/delete-product", {
       method: "POST",
-      credentials: "include", // include cookies/session
+      credentials: "include", 
       headers: {
         "Content-Type": "application/json",
         "CSRF-Token": csrfToken,
@@ -17,7 +17,7 @@ export const onDelete = async (productId, csrfToken) => {
       throw new Error(data.message || "Failed to delete product");
     }
 
-    return data; // { success, message, deletedProduct }
+    return data; 
   } catch (error) {
     console.error("Delete product error:", error);
     return { success: false, message: error.message };

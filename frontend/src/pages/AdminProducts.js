@@ -31,7 +31,7 @@ const AdminProducts = () => {
           getToken();
         }, []);
 
-    // Fetch products from backend
+    
     useEffect(() => {
       fetch("http://localhost:5000/admin/products", {
           method: "GET",
@@ -42,7 +42,7 @@ const AdminProducts = () => {
         }) 
         .then((res) => res.json())
         .then((data) => {
-          setProducts(data.prods || []); // backend sends { prods: [...] }
+          setProducts(data.prods || []);
           setLoading(false);
         })
         .catch((err) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Index.module.css"; // CSS module import
+import styles from "./Index.module.css"; 
 import { addToCart } from "../utils/cart";
 import { useNavigate } from "react-router-dom";
 import { checkAuthStatus } from "../utils/auth";
@@ -9,14 +9,13 @@ function ProductList() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Fetch products from backend
+ 
   useEffect(() => {
-    fetch("http://localhost:5000/") // 👈 your backend route
+    fetch("http://localhost:5000/") 
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.prods || []); // backend sends { prods: [...] }
+        setProducts(data.prods || []); 
         setLoading(false);
-        //console.log(products[0].averageRating) ;
       })
       .catch((err) => {
         console.error("Error fetching products:", err);

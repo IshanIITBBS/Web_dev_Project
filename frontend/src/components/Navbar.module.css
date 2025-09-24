@@ -69,11 +69,11 @@
 }
 
 .navbarLeft a.activeLink { 
-  color: #f7a300; /* Or whatever color you want */ 
+  color: #f7a300; 
   font-weight: bold; 
 }
 
-/* 🍔 Hamburger button */
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -91,7 +91,7 @@
   border-radius: 2px;
 }
 
-/* Menu wrapper (desktop vs mobile) */
+
 .menu {
   display: flex;
   gap: 2rem;
