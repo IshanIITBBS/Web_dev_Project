@@ -17,19 +17,26 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 
-const FRONTEND_URL = process.env.FRONTEND_URL ;
 
-  app.use(
-    cors({
-      origin: [
-        "http://localhost:3000",
-         FRONTEND_URL,
-      ],
-      origin: true,
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-      credentials: true,
-    })
-  );
+
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
+app.use((req,res,next)=>{
+  console.log(req.headers.origin) ;
+  console.log(FRONTEND_URL) ;
+  console.log(req.headers.CSRF-Token) ;
+  next() ;
+})
+
+// Correct CORS configuration
+app.use(
+  cors({
+    origin: ["http://localhost:3000", FRONTEND_URL], // Combine all allowed origins here
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  })
+);
+
   
 
 
@@ -109,8 +116,8 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404);
-//const PORT = process.env.PORT || 5000; // fallback to 5000 locally
-const PORT = 5000 
+const PORT = process.env.PORT || 5000; // fallback to 5000 locally
+
 Mongoose.connect(MongoUri)
 .then(()=>{
     console.log('connected') ;
