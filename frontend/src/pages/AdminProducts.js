@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchCsrfToken } from "../utils/auth";
 import { onDelete } from "../utils/admin";
 
+
 const AdminProducts = () => {
    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -83,7 +84,7 @@ const AdminProducts = () => {
               </div>
 
               <div className={styles.cardContent}>
-                <h2 className={styles.productPrice}>${product.price}</h2>
+                <h2 className={styles.productPrice}>Rs {product.price}</h2>
                 <p className={styles.productDescription}>
                   {product.description}
                 </p>

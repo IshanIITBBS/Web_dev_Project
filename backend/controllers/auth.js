@@ -104,6 +104,8 @@ exports.getsignup = (req,res,next)=>{
     })
 }
 
+
+
 // exports.postsignup = (req,res,next)=>{
 //     const errors = validationResult(req) ;
 //     if(!errors.isEmpty())
@@ -217,6 +219,7 @@ exports.postsignup = (req, res, next) => {
 
 
 exports.getAuthStatus = (req, res) => {
+  let email = "" ;
   if (req.session && req.session.loggedIn) {
     return res.json({ isLoggedIn: true, user: req.session.user });
   } else {

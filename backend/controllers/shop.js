@@ -88,19 +88,54 @@ exports.postcart = (req, res, next) => {
 // };
 
 // controllers/shop.js
-exports.getIndex = (req, res, next) => {
-  Product.find()
-    .then(products => {
-      res.json({
-        prods: products,
-        pageTitle: 'Shop',
-        loggedIn: req.session ? req.session.loggedIn : false
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: "Failed to fetch products" });
+// exports.getIndex = (req, res, next) => {
+//   Product.find()
+//     .then(products => {
+//       res.json({
+//         prods: products,
+//         pageTitle: 'Shop',
+//         loggedIn: req.session ? req.session.loggedIn : false
+//       });
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.status(500).json({ error: "Failed to fetch products" });
+//     });
+// };
+// Example: GET /?page=2&limit=6&sort=asc&search=apple
+exports.getIndex = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 1;   // default page 1
+    const limit = parseInt(req.query.limit) || 5; // default 6 per page
+    const skip = (page - 1) * limit;
+
+    const sort = req.query.sort === "asc" ? { price: 1 } : 
+                 req.query.sort === "desc" ? { price: -1 } : {};
+
+    const search = req.query.search ? {
+      title: { $regex: req.query.search, $options: "i" } // case-insensitive search
+    } : {};
+
+    // fetch filtered, sorted, paginated products
+    const products = await Product.find(search)
+      .sort(sort)
+      .skip(skip)
+      .limit(limit);
+
+    const totalProducts = await Product.countDocuments(search);
+    //console.log(products[0].price)
+    res.json({
+      prods: products,
+      totalProducts,
+      currentPage: page,
+      totalPages: Math.ceil(totalProducts / limit),
+      loggedIn: req.session ? req.session.loggedIn : false
     });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
 };
 
 
@@ -195,6 +230,63 @@ exports.getloginreq = (req,res,next)=>{
   }) ;
 }
 
+
+exports.addReview = async (req, res) => {
+  const { productId } = req.params;
+  const { rating, comment } = req.body;
+
+  try {
+    const product = await Product.findById(productId);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    // Make sure user info is present
+    if (!req.user) return res.status(401).json({ message: "User not logged in" });
+
+    const review = {
+      user: req.user._id,       // user id from session
+      username: req.user.email,  // username from session
+      rating,
+      comment,
+      createdAt: new Date()
+    };
+
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.averageRating =
+      product.reviews.reduce((sum, r) => sum + r.rating, 0) / product.reviews.length;
+
+    await product.save();
+
+    res.status(201).json({ message: "Review added successfully", review });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to add review" });
+  }
+};
+
+exports.getProductReviews = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    // find the product
+    const product = await Product.findById(productId).select("title reviews averageRating numReviews");
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+ ;
+    res.json({
+      productId: product._id,
+      title: product.title,
+      reviews: product.reviews || [],
+      averageRating: product.averageRating || 0,
+      numReviews: product.numReviews || 0
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch reviews" });
+  }
+};
 // exports.getCheckout = (req, res, next) => {
 //   res.render('shop/checkout', {
 //     path: '/checkout',

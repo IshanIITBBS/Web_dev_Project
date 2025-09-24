@@ -16,6 +16,7 @@ function ProductList() {
       .then((data) => {
         setProducts(data.prods || []); // backend sends { prods: [...] }
         setLoading(false);
+        //console.log(products[0].averageRating) ;
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
@@ -44,10 +45,26 @@ function ProductList() {
               </div>
 
               <div className={styles.cardContent}>
-                <h2 className={styles.productPrice}>${product.price}</h2>
+                <h2 className={styles.productPrice}>Rs {product.price}</h2>
                 <p className={styles.productDescription}>{product.description}</p>
               </div>
-
+               <div className={styles.starRating}>
+                {Array.from({ length: 5 }, (_, i) => (
+                  <span
+                    key={i}
+                    className={i < Math.round(product.averageRating) ? styles.filledStar : styles.emptyStar}
+                  >
+                    ★
+                  </span>
+                ))}
+                 
+                <span className={styles.ratingText}>
+                  ({product.numReviews || 0} reviews)
+                </span>
+              </div>
+               <p className={styles.averageRating}>
+                     ⭐ Average Rating: {product.averageRating ? product.averageRating.toFixed(1) : "No ratings yet"}
+                </p>
               <div className={styles.cardActions}>
                 <button
                   className={styles.btn}
@@ -56,6 +73,7 @@ function ProductList() {
                   Add to Cart
                 </button>
               </div>
+
             </article>
           ))}
         </div>

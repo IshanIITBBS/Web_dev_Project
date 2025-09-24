@@ -39,7 +39,7 @@
 
 .image {
   max-width: 100%;
-  height: auto;
+  height: 200px;
   border-radius: 8px;
   transition: transform 0.2s ease;
 }
@@ -98,4 +98,124 @@
 
 .btnDetails:hover {
   background: #1d3640;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.searchInput {
+  width: 70%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #007bff;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+
+
+.sortSelect {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #959595;
+  border-radius: 8px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.sortSelect:focus {
+  border-color: #007bff;
+}
+/* Pagination styles */
+/* Controls (search + sort) */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.controls input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #05a7f9;
+  border-radius: 6px;
+  width: 500px;
+}
+
+.controls select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #0777ff;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.pageBtn {
+  background: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pageBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: #21867a;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+
+.starRating span {
+  font-size: 1.2rem;
+}
+
+.filledStar {
+  color: gold; /* Yellow stars */
+}
+
+.emptyStar {
+  color: #ccc; /* Gray for empty stars */
+}
+
+.ratingText {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 0.5rem;
 }

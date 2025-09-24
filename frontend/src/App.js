@@ -12,6 +12,8 @@ import AdminProducts from './pages/AdminProducts';
 import AddProduct from './pages/Addproduct';
 import EditProduct from './pages/Editproduct'
 import SignupPage from './pages/SignupPage';
+import AddReviewPage from './pages/AddReviewPage.js';
+import ShowReviewsPage from './pages/ShowReviewsPage.js';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
          <Route path="/admin/add-product" element={<AddProduct />} />
           <Route path="/admin/edit-product/:productId" element={<EditProduct />} /> 
           <Route path="/signup" element={<SignupPage />} /> 
+          <Route path="/products/:productId/add-review" element={<AddReviewPage />} />
+          <Route path="/products/:productId/reviews" element={<ShowReviewsPage />} />
         <Route path="*" element={<h1>404: Not Found</h1>} />
       </Routes>
     </div>

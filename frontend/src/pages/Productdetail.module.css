@@ -79,3 +79,29 @@
   margin-top: 3rem;
   color: #666;
 }
+
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+
+.starRating span {
+  font-size: 1.2rem;
+}
+
+.filledStar {
+  color: gold; /* Yellow stars */
+}
+
+.emptyStar {
+  color: #ccc; /* Gray for empty stars */
+}
+
+.ratingText {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 0.5rem;
+}

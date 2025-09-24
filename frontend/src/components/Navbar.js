@@ -6,9 +6,10 @@ import { checkAuthStatus, fetchCsrfToken } from "../utils/auth";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // 👈 New: Get the current location object
+  const location = useLocation();
   const [auth, setAuth] = useState({ isLoggedIn: false });
   const [csrfToken, setCsrfToken] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false); // 👈 New state for mobile menu
 
   useEffect(() => {
     async function fetchAuth() {
@@ -27,8 +28,6 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-        
-       
     fetch("http://localhost:5000/logOut", {
       method: "POST",
       credentials: "include",
@@ -39,7 +38,7 @@ const Navbar = () => {
     })
       .then((res) => {
         if (res.ok) {
-              window.location.href = "/" ;
+          window.location.href = "/";
         } else {
           console.error("Logout failed");
         }
@@ -48,72 +47,98 @@ const Navbar = () => {
   };
 
   const getLinkClassName = (path) => {
-    // Check if the current path matches the link's path
-    
-    return location.pathname == path ? styles.activeLink : ""; 
+    return location.pathname === path ? styles.activeLink : "";
   };
 
   return (
     <nav className={styles.navbar}>
-      <ul className={styles.navbarLeft}>
-        <li>
-          {/* Apply the activeLink class if the path matches */}
-          <Link to="/" className={getLinkClassName("/")}>
-            Shop
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className={getLinkClassName("/products")}>
-            Products
-          </Link>
-        </li>
-        <li>
-          <Link to="/cart" className={getLinkClassName("/cart")}>
-            Cart
-          </Link>
-        </li>
-        <li>
-          <Link to="/orders" className={getLinkClassName("/orders")}>
-            Orders
-          </Link>
-        </li>
-        <li>
-          <Link to="/admin/add-product" className={getLinkClassName("/admin/add-product")}>
-            Add Product
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/admin/products"
-            className={getLinkClassName("/admin/products")}
-          >
-            Admin
-          </Link>
-        </li>
-      </ul>
+      {/* Logo or Title */}
+      <div className={styles.logo}>
+        🛒 Shop
+      </div>
+       
+      {/* Hamburger Icon for Mobile */}
+      <div
+        className={styles.hamburger}
+        onClick={() => setMenuOpen((prev) => !prev)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-      <ul className={styles.navbarRight}>
-        {!auth.isLoggedIn ? (
-          <>
-            <li>
-              <Link to="/login" className={getLinkClassName("/login")}>
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup" className={getLinkClassName("/signup")}>
-                Signup
-              </Link>
-            </li>
-          </>
-        ) : (
+      {/* Menu Links */}
+      <div className={`${styles.menu} ${menuOpen ? styles.open : ""}`}>
+        <ul className={styles.navbarLeft}>
           <li>
-            <button className={styles.logoutBtn} onClick={handleLogout}>
-              Logout
-            </button>
+            <Link to="/" className={getLinkClassName("/")}>
+              Shop
+            </Link>
           </li>
-        )}
-      </ul>
+          <li>
+            <Link to="/products" className={getLinkClassName("/products")}>
+              Products
+            </Link>
+          </li>
+          {auth.isLoggedIn && (
+            <>
+              <li>
+                <Link to="/cart" className={getLinkClassName("/cart")}>
+                  Cart
+                </Link>
+              </li>
+              <li>
+                <Link to="/orders" className={getLinkClassName("/orders")}>
+                  Orders
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/add-product"
+                  className={getLinkClassName("/admin/add-product")}
+                >
+                  Add Product
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/products"
+                  className={getLinkClassName("/admin/products")}
+                >
+                  Admin Products
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+
+        <ul className={styles.navbarRight}>
+          {!auth.isLoggedIn ? (
+            <>
+              <li>
+                <Link to="/login" className={getLinkClassName("/login")}>
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup" className={getLinkClassName("/signup")}>
+                  Signup
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <button className={styles.logoutBtn} onClick={handleLogout}>
+        
+                 <div className={styles.email}>
+                   {auth.user.email}
+                 </div>
+                Logout
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 };

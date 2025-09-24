@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { addToCart } from "../utils/cart";
 import styles from "./Productdetail.module.css";
 import { checkAuthStatus } from "../utils/auth";
+
 const ProductDetail = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -17,8 +18,6 @@ const ProductDetail = () => {
 
   if (!product) return <h2 className={styles.loading}>Loading...</h2>;
 
-
-
   return (
     <main className={styles.productDetail}>
       <h1 className={styles.detailTitle}>{product.title}</h1>
@@ -30,14 +29,45 @@ const ProductDetail = () => {
           className={styles.detailImage}
         />
       </div>
-      <h2 className={styles.detailPrice}>${product.price}</h2>
+      <div className={styles.starRating}>
+        {Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            className={i < Math.round(product.averageRating) ? styles.filledStar : styles.emptyStar}
+          >
+            ★
+          </span>
+        ))}
+        <span className={styles.ratingText}>
+          ({product.numReviews || 0} reviews)
+        </span>
+      </div>
+        <p className={styles.averageRating}>
+                                            ⭐ Average Rating: {product.averageRating ? product.averageRating.toFixed(1) : "No ratings yet"}
+        </p>
+      <h2 className={styles.detailPrice}>Rs {product.price}</h2>
       <p className={styles.detailDescription}>{product.description}</p>
+
       <div className={styles.detailActions}>
         <button
           className={styles.btn}
-          onClick={() => addToCart(product._id, navigate,checkAuthStatus)}
+          onClick={() => addToCart(product._id, navigate, checkAuthStatus)}
         >
           Add to Cart
+        </button>
+
+        <button
+          className={styles.btn}
+          onClick={() => navigate(`/products/${productId}/add-review`)}
+        >
+          Add Review
+        </button>
+
+        <button
+          className={styles.btn}
+          onClick={() => navigate(`/products/${productId}/reviews`)}
+        >
+          Show Reviews
         </button>
       </div>
     </main>

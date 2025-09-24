@@ -51,7 +51,7 @@
 
 .image {
   max-width: 100%;
-  height: auto;
+  height: 200px;
   border-radius: 8px;
   transition: transform 0.2s ease;
 }
@@ -101,4 +101,28 @@
 
 .btn:hover {
   background: #21867a;
+}
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+
+.starRating span {
+  font-size: 1.2rem;
+}
+
+.filledStar {
+  color: gold; /* Yellow stars */
+}
+
+.emptyStar {
+  color: #ccc; /* Gray for empty stars */
+}
+
+.ratingText {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 0.5rem;
 }

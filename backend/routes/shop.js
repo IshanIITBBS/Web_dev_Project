@@ -23,5 +23,6 @@ router.post('/create-order',logincheck, shopController.getPostOrder) ;
 // // router.get('/checkout', shopController.getCheckout);
 router.post('/delete-product',logincheck,shopController.deleteCartproduct) ;
 router.get('/loginreq',shopController.getloginreq) ;
-
+router.get("/products/:productId/reviews",shopController.getProductReviews);
+router.post("/products/:productId/addreview",logincheck,shopController.addReview);
 module.exports = router;

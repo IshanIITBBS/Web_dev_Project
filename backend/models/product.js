@@ -1,7 +1,33 @@
 const mongoose = require('mongoose') ;
 
 
+
 const Schema = mongoose.Schema ;
+const reviewSchema = new Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",  // reference to User model
+    required: true
+  },
+  username: {
+    type: String,
+    required: true   // for easy access without populating
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true
+  },
+  comment: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
 
 const productschema = new Schema({
   title:{
@@ -24,6 +50,21 @@ const productschema = new Schema({
     type:Schema.Types.ObjectId,
     ref:"User", 
     required:true
+  },
+
+   // 🆕 Add reviews
+  reviews: [reviewSchema],
+
+  // 🆕 Store average rating for faster queries
+  averageRating: {
+    type: Number,
+    default: 0
+  },
+
+  // 🆕 Store number of reviews for quick access
+  numReviews: {
+    type: Number,
+    default: 0
   }
 })
 
