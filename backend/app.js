@@ -24,7 +24,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 app.use((req,res,next)=>{
   console.log(req.headers.origin) ;
   console.log(FRONTEND_URL) ;
-  const csrf = req.headers['CSRF-Token'] ;
+  const csrf = req.headers['csrf-token'] ;
   console.log(csrf) ;
   next() ;
 })
