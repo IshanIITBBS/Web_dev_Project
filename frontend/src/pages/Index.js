@@ -11,7 +11,9 @@ function ProductList() {
 
  
   useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/`) 
+      fetch(`${process.env.REACT_APP_API_URL}/`, {
+      credentials: "include", 
+    })
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.prods || []); 

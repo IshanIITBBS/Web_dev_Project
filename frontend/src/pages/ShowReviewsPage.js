@@ -9,7 +9,9 @@ const ShowReviewsPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/reviews`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/reviews`, {
+      credentials: "include", 
+    })
       .then((res) => res.json())
       .then((data) => {
         setReviews(data.reviews || []);

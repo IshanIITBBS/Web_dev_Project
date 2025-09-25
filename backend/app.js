@@ -20,21 +20,38 @@ require("dotenv").config();
 
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
-app.use((req,res,next)=>{
-  console.log(req.headers.origin) ;
-  console.log(FRONTEND_URL) ;
-  next() ;
-})
+// // app.use((req,res,next)=>{
+// //   console.log(req.headers.origin) ;
+// //   console.log(FRONTEND_URL) ;
+// //   next() ;
+// // })
 
 
-app.use((req, res, next) => {
-  if (req.headers['csrf-token']) {
-    req.headers['x-csrf-token'] = req.headers['csrf-token'];
-  }
-  next();
-});
+// // app.use((req, res, next) => {
+// //   if (req.headers['csrf-token']) {
+// //     req.headers['x-csrf-token'] = req.headers['csrf-token'];
+// //   }
+// //   next();
+// // });
 
-// Correct CORS configuration
+
+
+  
+
+
+
+const MongoUri = process.env.MONGO_URI ;
+
+
+
+
+
+
+
+
+
+
+
 app.use(
   cors({
     origin: ["http://localhost:3000", FRONTEND_URL], // Combine all allowed origins here
@@ -43,11 +60,7 @@ app.use(
   })
 );
 
-  
 
-
-
-const MongoUri = process.env.MONGO_URI ;
 const Mongostore = MongoSessionConnect(session);
 const store = new Mongostore({
     uri : MongoUri,
@@ -58,45 +71,43 @@ const store = new Mongostore({
 
 
 
+// // app.use((req, res, next) => {
+// //   if (req.headers['csrf-token'])
+// //   {  
+// //   // This is the token that the csurf middleware will get from the session
+// //   const sessionToken = req.session ? req.session.csrfSecret : 'No session found';
+// //   console.log('Server Session Token:', sessionToken);
+
+// //   // This is the token that the csurf middleware will read from the request header
+// //   const receivedToken = req.headers['csrf-token'] || req.headers['x-csrf-token'] ;
+// //   console.log('Received Token from client:', receivedToken);
+// //   }
+// //   next(); // Pass control to the next middleware
+// // });
 
 
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
+app.use(express.json()); // parses application/json
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+//app.use(session({secret:'my secret',resave:false,saveUninitialized:false,store:store}));
 app.use(session({
   secret: 'my secret',
   resave: false,
   saveUninitialized: false,
   store: store,
-   cookie: {
+     cookie: {
+      httpOnly: true,
     sameSite: "none",
-    secure: true
+    secure: true,
   }
 }));
-
-app.use((req, res, next) => {
-  if (req.headers['csrf-token'])
-  {  
-  // This is the token that the csurf middleware will get from the session
-  const sessionToken = req.session ? req.session.csrfSecret : 'No session found';
-  console.log('Server Session Token:', sessionToken);
-
-  // This is the token that the csurf middleware will read from the request header
-  const receivedToken = req.headers['csrf-token'] || req.headers['x-csrf-token'] ;
-  console.log('Received Token from client:', receivedToken);
-  }
-  next(); // Pass control to the next middleware
-});
-
 const csrfProtection = csruf() ;
 app.use(csrfProtection) ;
-
-app.use(express.json()); // parses application/json
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(flash()) ;
 

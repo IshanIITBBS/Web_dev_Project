@@ -17,7 +17,9 @@ function ProductList() {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `${process.env.REACT_APP_API_URL}/?page=${currentPage}&limit=5&sort=${sortOrder}&search=${searchval}`
+      `${process.env.REACT_APP_API_URL}/?page=${currentPage}&limit=5&sort=${sortOrder}&search=${searchval}`, {
+      credentials: "include", 
+    }
     )
       .then((res) => res.json())
       .then((data) => {

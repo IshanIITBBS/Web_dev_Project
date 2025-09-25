@@ -10,7 +10,9 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
+      credentials: "include", 
+    })
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error(err));
