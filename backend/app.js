@@ -79,14 +79,16 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+  if (req.headers['csrf-token'])
+  {  
   // This is the token that the csurf middleware will get from the session
   const sessionToken = req.session ? req.session.csrfSecret : 'No session found';
   console.log('Server Session Token:', sessionToken);
 
   // This is the token that the csurf middleware will read from the request header
-  const receivedToken = req.headers['csrf-token'] || req.headers['x-csrf-token'] || req.body._csrf;
+  const receivedToken = req.headers['csrf-token'] || req.headers['x-csrf-token'] ;
   console.log('Received Token from client:', receivedToken);
-
+  }
   next(); // Pass control to the next middleware
 });
 
