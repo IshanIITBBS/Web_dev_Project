@@ -5,7 +5,6 @@ const Mongoose = require('mongoose') ;
  const session = require('express-session') ;
  const  MongoSessionConnect = require('connect-mongodb-session')
  const csruf = require('csurf')
-const { doubleCsrf } = require('csrf-csrf'); 
 const flash = require('connect-flash')
 const errorController = require('./controllers/error');
  const Product=require('./models/product.js')
@@ -79,11 +78,18 @@ app.use(session({
   }
 }));
 
-app.use((req,res,next)=>{
-  const csrf = req.headers['csrf-token'] ;
-  console.log(csrf) ;
-  next() ;
-})
+app.use((req, res, next) => {
+  // This is the token that the csurf middleware will get from the session
+  const sessionToken = req.session ? req.session.csrfSecret : 'No session found';
+  console.log('Server Session Token:', sessionToken);
+
+  // This is the token that the csurf middleware will read from the request header
+  const receivedToken = req.headers['csrf-token'] || req.headers['x-csrf-token'] || req.body._csrf;
+  console.log('Received Token from client:', receivedToken);
+
+  next(); // Pass control to the next middleware
+});
+
 const csrfProtection = csruf() ;
 app.use(csrfProtection) ;
 
