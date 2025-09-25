@@ -93,6 +93,7 @@ app.use(express.json()); // parses application/json
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set("trust proxy", 1); // very important for Render/Heroku-like proxies
 
 //app.use(session({secret:'my secret',resave:false,saveUninitialized:false,store:store}));
 app.use(session({
