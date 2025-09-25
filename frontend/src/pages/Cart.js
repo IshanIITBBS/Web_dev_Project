@@ -42,10 +42,13 @@ const CartPage = () => {
       .then((data) => {
         setCartItems(data.products || []);
         setTotalPrice(data.totalPrice || 0);
-        setLoading(false) ;
        // console.log(data.products) ;
       })
+      .then(()=>{
+         setLoading(false) ;
+      })
       .catch((err) => console.error("Error fetching cart:", err));
+
   }, []);
 
   const handleDelete = async (productId) => {
