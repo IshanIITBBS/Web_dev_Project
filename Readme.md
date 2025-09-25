@@ -116,11 +116,13 @@ The project is built with **React (frontend)** and **Node.js (backend)**, and de
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-14) Add a Product  to site
+14) Add a Product  to site / Edit a product 
 
-![alt text](/images/Addproducts.png)
+![alt text](/images/editproduct.png)
+
 
 --------------------------------------------------------------------------------------------------------------------------------
+
 
 ## 🔗 Backend Endpoints
 | Method | Endpoint           | Description                  |
