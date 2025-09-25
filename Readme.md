@@ -43,13 +43,13 @@
 🔹 OVERVIEW :- 
 
 A full-stack web application including features of E-Commerce shoping websites  like search product , add product to cart,order products , admin features , give reviews etc .
-The project is built with **React (frontend)** and **Node.js (backend)**, and deployed on **Netlify (frontend)**  and **Render** . 
+The project is built with **React (frontend)** and **Node.js (backend)**, and deployed on **Netlify (frontend)**  and **Render(backend)** . 
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 🔹 TECH STACK :- 
 
-1) Node.js, Express.js, MongoDB for frontend 
+1) Node.js, Express.js, MongoDB for backend
 2) React.js for frontend
 
 --------------------------------------------------------------------------------------------------------------------------------
