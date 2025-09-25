@@ -24,10 +24,16 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 app.use((req,res,next)=>{
   console.log(req.headers.origin) ;
   console.log(FRONTEND_URL) ;
-  const csrf = req.headers['csrf-token'] ;
-  console.log(csrf) ;
   next() ;
 })
+
+
+app.use((req, res, next) => {
+  if (req.headers['csrf-token']) {
+    req.headers['x-csrf-token'] = req.headers['csrf-token'];
+  }
+  next();
+});
 
 // Correct CORS configuration
 app.use(
@@ -73,6 +79,11 @@ app.use(session({
   }
 }));
 
+app.use((req,res,next)=>{
+  const csrf = req.headers['csrf-token'] ;
+  console.log(csrf) ;
+  next() ;
+})
 const csrfProtection = csruf() ;
 app.use(csrfProtection) ;
 
