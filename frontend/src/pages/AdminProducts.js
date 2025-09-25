@@ -92,7 +92,7 @@ const AdminProducts = () => {
 
               <div className={styles.cardActions}>
                 <a
-                  href={`/admin/edit-product/${product._id}?edit=true`}
+                  href={`/admin/edit-product/${product._id}`}
                   className={styles.btn}
                 >
                   Edit

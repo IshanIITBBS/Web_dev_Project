@@ -9,7 +9,7 @@ const CartPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [csrfToken, setCsrfToken] = useState("");
   const navigate = useNavigate() ;
-  
+  const [loading,setLoading] = useState(true) ;
 
     useEffect(() => {
       async function fetchAuth() {
@@ -42,6 +42,7 @@ const CartPage = () => {
       .then((data) => {
         setCartItems(data.products || []);
         setTotalPrice(data.totalPrice || 0);
+        setLoading(false) ;
        // console.log(data.products) ;
       })
       .catch((err) => console.error("Error fetching cart:", err));
@@ -80,6 +81,8 @@ const CartPage = () => {
       console.error("Error creating order:", err);
     }
   };
+
+  if (loading) return <h2>Loading...</h2>;
 
   if (!cartItems || cartItems.length === 0) {
     return <h1 className={styles.centered}>Cart is Empty</h1>;

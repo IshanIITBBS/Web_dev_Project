@@ -10,7 +10,7 @@ const AddReviewPage = () => {
   const [error, setError] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
   const navigate = useNavigate();
-  
+  const [loading,setLoading] = useState(true) ;
    useEffect(() => {
       async function getToken() {
         const token = await fetchCsrfToken();
@@ -24,6 +24,10 @@ const AddReviewPage = () => {
         const status = await checkAuthStatus();
           if (!status.isLoggedIn) {
              navigate("/login");
+          }
+          else
+          {
+            setLoading(false) ;
           }
       }
       fetchAuth();
@@ -55,6 +59,7 @@ const AddReviewPage = () => {
     }
   };
 
+  if (loading) return <h2>Loading...</h2>;
   return (
     <main className={styles.addReviewPage}>
       <h1>Add Review</h1>
