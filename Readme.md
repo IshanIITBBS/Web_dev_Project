@@ -116,9 +116,9 @@ The project is built with **React (frontend)** and **Node.js (backend)**, and de
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-14) Add a Product 
+14) Add a Product  to site
 
-![alt text](/images/Addproduct.png)
+![alt text](/images/Addproducts.png)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
